@@ -1,13 +1,11 @@
 <template>
-
+    <div>
+        <h1>Here comes the map</h1>
+    </div>
 </template>
 
 <script>
-    export default {
-        name: "map"
-    }
 </script>
 
 <style scoped>
-
 </style>
