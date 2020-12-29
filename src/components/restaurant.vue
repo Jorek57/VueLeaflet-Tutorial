@@ -6,14 +6,13 @@
     <l-icon ref="icon">
       <img class="restaurant-icon" :src="marker.imageUrl"/>
     </l-icon>
-    <l-popup>{{ marker.name }}</l-popup>
   </l-marker>
 </template>
 
 <script>
-import { LIcon, LMarker, LPopup } from 'vue2-leaflet'
+import { LIcon, LMarker } from 'vue2-leaflet'
 export default {
-  components: { LIcon, LMarker, LPopup },
+  components: { LIcon, LMarker },
   props: {
     marker: {
       type: Object,
