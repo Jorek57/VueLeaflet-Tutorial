@@ -11,25 +11,46 @@
       :url="url"
     >
     </l-tile-layer>
-    <restaurant
-      v-for="marker in markers"
-      :key="marker.id"
-      :marker="marker"
+    <v-marker-cluster
+      ref="cluster"
+      :averageCenter="true"
+      :ignoreHidden="true"
+      :options="clusterOptions"
     >
-    </restaurant>
+      <restaurant
+        v-for="marker in markers"
+        :key="marker.id"
+        :marker="marker"
+      >
+      </restaurant>
+    </v-marker-cluster>
   </l-map>
 </template>
 
 <script>
+import Vue from 'vue';
+import { Icon, divIcon } from 'leaflet';
 import { LMap, LTileLayer } from 'vue2-leaflet';
-import Restaurant from './restaurant'
+import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
+import Restaurant from './restaurant';
+import ClusterIcon from './cluster-icon'
 import 'leaflet/dist/leaflet.css';
+
+const EnhancedClusterIcon = Vue.extend(ClusterIcon);
+
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+})
 
 export default {
   components: {
     LMap,
     LTileLayer,
-    Restaurant
+    Restaurant,
+    'v-marker-cluster': Vue2LeafletMarkerCluster
   },
   data () {
     return {
@@ -42,7 +63,19 @@ export default {
         {id: 3, name: 'Boulangerie', imageUrl: 'https://img.icons8.com/doodle/48/000000/croissant--v1.png', coordinates: [ 49.102160, 6.158850 ]},
         {id: 4, name: 'Brunch', imageUrl: 'https://img.icons8.com/doodle/48/000000/the-toast--v2.png', coordinates: [ 49.136010, 6.199630 ]},
         {id: 5, name: 'Fast Food', imageUrl: 'https://img.icons8.com/doodle/48/000000/hamburger.png', coordinates: [ 49.105563, 6.182234 ]},
-      ]
+      ],
+      clusterOptions: {
+          spiderfyDistanceMultiplier: 3,
+          iconCreateFunction: cluster => {
+              let clusterUsers = cluster.getAllChildMarkers().map(marker => marker.id)
+              let clusterIconEl = new EnhancedClusterIcon({propsData: { clusterUsers }}).$mount().$el
+              return divIcon({
+                  html: clusterIconEl.outerHTML,
+                  className: 'cluster',
+                  iconSize: null
+              })
+          }
+      }
     }
   },
   methods: {
@@ -51,16 +84,22 @@ export default {
     },
     centerUpdated (center) {
       this.center = center;
-    }
+    },
   }
 }
 </script>
 
 <style>
+  @import "~leaflet.markercluster/dist/MarkerCluster.css";
   .map {
     position: absolute;
     width: 100%;
     height: 100%;
     overflow :hidden
+  }
+  .cluster {
+    position: absolute;
+    margin-left: -20px;
+    margin-top: -20px;
   }
 </style>
