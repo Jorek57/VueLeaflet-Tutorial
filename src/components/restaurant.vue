@@ -6,7 +6,10 @@
     <l-icon ref="icon">
       <img class="restaurant-icon" :src="marker.imageUrl"/>
     </l-icon>
-    <l-popup>{{ marker.name }}</l-popup>
+    <l-popup>
+      <h3>{{ marker.name }}</h3>
+      <p>{{ marker.grade }}</p>
+    </l-popup>
   </l-marker>
 </template>
 
@@ -27,6 +30,7 @@ export default {
 <style>
   .restaurant-icon {
     height: 50px;
+    margin-left: -15px;
     width: auto;
   }
 </style>
