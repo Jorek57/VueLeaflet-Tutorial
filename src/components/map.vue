@@ -61,7 +61,7 @@ export default {
         {id: 1, name: 'Restaurant de Poisson', imageUrl: 'https://img.icons8.com/doodle/48/000000/fish-food--v1.png', coordinates: [ 49.114910, 6.178810 ], grade: 'Simpa mais sans plus'},
         {id: 2, name: 'Pizzeria', imageUrl: 'https://img.icons8.com/doodle/48/000000/pizza--v1.png' ,coordinates: [ 49.133290, 6.154370 ], grade: 'Le meilleur en ville'},
         {id: 3, name: 'Boulangerie', imageUrl: 'https://img.icons8.com/doodle/48/000000/croissant--v1.png', coordinates: [ 49.102160, 6.158850 ], grade: 'Super découverte'},
-        {id: 4, name: 'Brunch', imageUrl: 'https://img.icons8.com/doodle/48/000000/the-toast--v2.png', coordinates: [ 49.136010, 6.199630 ], grade: 'Eu la gastro pendant 8 jours, à oublier'},
+        {id: 4, name: 'Brunch', imageUrl: 'https://img.icons8.com/doodle/48/000000/the-toast--v2.png', coordinates: [ 49.136010, 6.199630 ], grade: 'J\'ai mis un logo champagne pour faire élégant'},
         {id: 5, name: 'Fast Food', imageUrl: 'https://img.icons8.com/doodle/48/000000/hamburger.png', coordinates: [ 49.105563, 6.182234 ], grade: 'Je pourrais donner un avis mais j\'ai un peu la flemme tout bien réfléchi'},
       ],
       clusterOptions: {
